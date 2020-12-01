@@ -1,0 +1,13 @@
+/* File: app.css */
+
+body {
+  margin: 0;
+}
+
+.app-header {
+  align-items: center;
+  background-color: #282c34;
+  color: white;
+  display: flex;
+  justify-content: center;
+}
