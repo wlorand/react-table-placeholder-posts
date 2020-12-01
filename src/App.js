@@ -1,32 +1,35 @@
 // import React from 'react'; // not needed in v17
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
+import axios from 'axios';
 
 // styles
 import './styles/app.css';
 
-const initialPosts = [
-  { id: 301, title: 'first post', body: 'hello world' },
-  { id: 302, title: 'first post', body: 'hello world' },
-  { id: 303, title: 'first post', body: 'hello world' },
-];
-
 function App() {
-  const [posts] = useState(initialPosts);
+  const [posts] = useState([1, 2, 3]);
+  const url = 'https://jsonplaceholder.typicode.com/posts';
+
+  // useEffect as mimick of componentDidMount
+  // -- use it here first w/o useState for starters (likely storing in state next)
+  useEffect(() => {
+    // fetch with axios and log data
+    const fetchData = async (query) => {
+      const result = await axios.get(query);
+      console.log(result.data); // axios result object also has status and lots more
+    };
+    // invoke
+    fetchData(url);
+  }, []); // empty dependency array means just runs once onLoad aka componentDidMount
 
   return (
     <div>
       <header className="app-header">
         <h1>React Table Placeholder Posts</h1>
       </header>
-      <table border="1px">
-        {posts.map((post, i) => (
-          <tr key={i}>
-            <td width="200px">{post.id}</td>
-            <td width="200px">{post.title}</td>
-            <td width="200px">{post.body}</td>
-          </tr>
-        ))}
-      </table>
+      {posts.map((post, i) => (
+        <p key={i}>{post}</p>
+      ))}
     </div>
   );
 }
