@@ -5,10 +5,10 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 // data rendering libs
-// import { useState } from 'react-table'; // v7
+// import { useTable } from 'react-table'; // v7
 import ReactTable from 'react-table'; // v6
 
-// styles
+// styles -- no react-table css needed for v7
 import 'react-table/react-table.css'; // v6 only - this throws not found error in v7
 import './styles/app.css';
 
@@ -32,7 +32,7 @@ function App() {
     fetchData(url);
   }, []); // empty dependency array means just runs once onLoad aka componentDidMount
 
-  // define table columns
+  // define table columns - key step for react-table
   const columns = [
     { Header: 'User ID', accessor: 'userId' },
     { Header: 'ID', accessor: 'id' },
@@ -46,6 +46,7 @@ function App() {
         <h1>React Table Placeholder Posts</h1>
       </header>
       {/* TODO: move the ReactTable to its own component */}
+      {/* easy-peasy v6 version -- has default UI for pagination, sorting out of the box */}
       <ReactTable columns={columns} data={posts} />
     </div>
   );
